@@ -3,6 +3,7 @@ import { Button, Card, Spin } from 'antd';
 
 const LikeAFacebookContentComponent = ({ rewardData }) => {
   const [loading, setLoading] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   const facebookPageURL = 'https://www.facebook.com/imdb/';
 
@@ -30,13 +31,19 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
 
   React.useEffect(() => {
     loadFbLoginApi();
+    window.FB.getLoginStatus(function (response) {
+      console.log(response);
+      if (response.status === 'connected') {
+        console.log('token = ' + response.authResponse.accessToken);
+      }
+    });
   }, []);
 
   const testAPI = () => {
     console.log('hi');
     FB.getLoginStatus(function (response) {
-      console.log(response);
       if (response.status === 'connected') {
+        setIsLogin(true);
         console.log('token = ' + response.authResponse.accessToken);
       }
     });
@@ -72,7 +79,7 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
 
   return (
     <React.Fragment>
-      <Button onClick={testAPI}>Test 1</Button>
+      {isLogin && (<Button onClick={testAPI}>Test 1</Button>)}
 
       <Card>
         <div id="fb-root"></div>
