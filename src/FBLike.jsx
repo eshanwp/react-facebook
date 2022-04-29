@@ -13,6 +13,7 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
         appId: 339596424708309,
         cookie: true,
         xfbml: true,
+        status: true,
         version: 'v13.0',
       });
       setLoading(false);
@@ -37,6 +38,17 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
           // to log in to Facebook before authorizing your application.
         }
       });
+
+      /*FB.login(function (response) {
+        if (response.authResponse) {
+          console.log('Welcome!  Fetching your information.... ');
+          FB.api('/me', function (response) {
+            console.log('Good to see you, ' + response.name + '.');
+          });
+        } else {
+          console.log('User cancelled login or did not fully authorize.');
+        }
+      });*/
     };
 
     (function (d, s, id) {
@@ -48,6 +60,16 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
       js.src = '//connect.facebook.net/en_US/sdk.js';
       fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
+  }
+
+  function login() {
+    FB.login(function (response) {
+      if (response.authResponse) {
+        // proceed
+      } else {
+        // not auth / cancelled the login!
+      }
+    });
   }
 
   React.useEffect(() => {
