@@ -76,15 +76,23 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
       }
     });
 
-    /*FB.api('/me/likes', function (response) {
-      if (response && !response.error) {
+    FB.api(
+      {
+        method: 'pages.isFan',
+        page_id: '997108126967413',
+      },
+      function (response) {
         console.log(response);
+        if (response) {
+          alert('You Likey');
+        } else {
+          alert('You not Likey :(');
+        }
       }
-    });*/
+    );
 
     /* make the API call */
-    FB.api('/108125611810619/likes', function (response) {
-      console.log(response);
+    FB.api('/me/likes', function (response) {
       if (response && !response.error) {
         console.log(response);
         const res = response.data.find((item) => item.name === 'Meta');
