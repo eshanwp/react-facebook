@@ -38,16 +38,19 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
         }
       });
 
-      /*FB.login(function (response) {
-        if (response.authResponse) {
-          console.log('Welcome!  Fetching your information.... ');
-          FB.api('/me', function (response) {
-            console.log('Good to see you, ' + response.name + '.');
-          });
-        } else {
-          console.log('User cancelled login or did not fully authorize.');
-        }
-      });*/
+      /*FB.login(
+        function (response) {
+          if (response.authResponse) {
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function (response) {
+              console.log('Good to see you, ' + response.name + '.');
+            });
+          } else {
+            console.log('User cancelled login or did not fully authorize.');
+          }
+        },
+        { scope: 'email,user_likes' }
+      );*/
     };
 
     (function (d, s, id) {
@@ -59,16 +62,6 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
       js.src = '//connect.facebook.net/en_US/sdk.js';
       fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
-  }
-
-  function login() {
-    FB.login(function (response) {
-      if (response.authResponse) {
-        // proceed
-      } else {
-        // not auth / cancelled the login!
-      }
-    });
   }
 
   React.useEffect(() => {
@@ -90,9 +83,12 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
     });*/
 
     /* make the API call */
-    FB.api('/imdb/likes', function (response) {
+    FB.api('/108125611810619/likes', function (response) {
+      console.log(response);
       if (response && !response.error) {
         console.log(response);
+        const res = response.data.find((item) => item.name === 'Meta');
+        console.log(res);
         /* handle the result */
       }
     });

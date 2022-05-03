@@ -1,27 +1,21 @@
 export function initFacebookSdk() {
   return new Promise((resolve) => {
-    // wait for facebook sdk to initialize before starting the react app
     window.fbAsyncInit = function () {
-      window.FB.init({
-        appId: '339596424708309',
-        cookie: true,
+      FB.init({
+        appId: '419540283336546',
         xfbml: true,
-        status: false,
-        oauth: true,
         version: 'v13.0',
       });
-      // auto authenticate with the api if already logged in with facebook
       window.FB.getLoginStatus(({ authResponse }) => {
         // debugger;
+        console.log(authResponse);
         if (authResponse) {
-          resolve(authResponse);
         } else {
           resolve('null');
         }
       });
     };
 
-    // load facebook sdk script
     (function (d, s, id) {
       var js,
         fjs = d.getElementsByTagName(s)[0];
@@ -30,8 +24,7 @@ export function initFacebookSdk() {
       }
       js = d.createElement(s);
       js.id = id;
-      js.src =
-        'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v13.0';
+      js.src = 'https://connect.facebook.net/en_US/sdk.js';
       fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
   });
