@@ -3,7 +3,7 @@ import { Button, Card, Spin } from 'antd';
 
 const LikeAFacebookContentComponent = ({ rewardData }) => {
   const [loading, setLoading] = useState(true);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   const facebookPageURL = 'https://www.facebook.com/imdb/';
 
@@ -84,9 +84,17 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
       }
     });
 
-    FB.api('/me/likes', function (response) {
+    /*FB.api('/me/likes', function (response) {
       if (response && !response.error) {
         console.log(response);
+      }
+    });*/
+
+    /* make the API call */
+    FB.api('/imdb/likes', function (response) {
+      if (response && !response.error) {
+        console.log(response);
+        /* handle the result */
       }
     });
 
