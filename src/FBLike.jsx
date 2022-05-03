@@ -13,7 +13,6 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
         appId: 339596424708309,
         cookie: true,
         xfbml: true,
-        status: true,
         version: 'v13.0',
       });
       setLoading(false);
@@ -77,8 +76,8 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
   }, []);
 
   const testAPI = () => {
-    console.log('hi');
     FB.getLoginStatus(function (response) {
+      console.log(response);
       if (response.status === 'connected') {
         console.log('token = ' + response.authResponse.accessToken);
       }
@@ -126,28 +125,17 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
       {isLogin && <Button onClick={testAPI}>Test 1</Button>}
 
       <Card>
-        <div id="fb-root"></div>
         {loading ? (
           <Spin />
         ) : (
           <div
             className="fb-page"
-            data-href={facebookPageURL}
-            data-tabs="timeline"
+            data-href="https://www.facebook.com/facebook"
+            data-hide-cover="false"
+            data-show-facepile="false"
             data-width="500"
             data-height="352"
-            data-small-header="false"
-            data-adapt-container-width="true"
-            data-hide-cover="false"
-            data-show-facepile="true"
-          >
-            <blockquote
-              cite={facebookPageURL}
-              className="fb-xfbml-parse-ignore"
-            >
-              <a href={facebookPageURL}>Meta</a>
-            </blockquote>
-          </div>
+          ></div>
         )}
       </Card>
     </React.Fragment>
