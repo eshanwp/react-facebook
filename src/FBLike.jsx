@@ -76,7 +76,7 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
       }
     });
 
-    FB.api(
+    /*FB.api(
       {
         method: 'pages.isFan',
         page_id: '997108126967413',
@@ -89,10 +89,11 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
           alert('You not Likey :(');
         }
       }
-    );
+    );*/
 
     /* make the API call */
-    FB.api('/me/likes', function (response) {
+    FB.api('/me/likes/339596424708309', function (response) {
+      console.log(response);
       if (response && !response.error) {
         console.log(response);
         const res = response.data.find((item) => item.name === 'Meta');
