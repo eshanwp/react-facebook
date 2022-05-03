@@ -92,7 +92,7 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
     );*/
 
     /* make the API call */
-    FB.api('/me/likes/108125611810619', function (response) {
+    FB.api('/me/likes/Meta', function (response) {
       console.log(response);
       if (response && !response.error) {
         console.log(response);
