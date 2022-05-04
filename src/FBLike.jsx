@@ -38,7 +38,7 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
         }
       });
 
-      /*FB.login(
+      FB.login(
         function (response) {
           if (response.authResponse) {
             console.log('Welcome!  Fetching your information.... ');
@@ -50,7 +50,7 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
           }
         },
         { scope: 'email,user_likes' }
-      );*/
+      );
     };
 
     (function (d, s, id) {
@@ -69,60 +69,19 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
   }, []);
 
   const testAPI = () => {
-    FB.getLoginStatus(function (response) {
-      console.log(response);
+    window.FB.getLoginStatus(function (response) {
       if (response.status === 'connected') {
         console.log('token = ' + response.authResponse.accessToken);
+
+        window.FB.api('/me/likes', function (response) {
+          if (response && !response.error) {
+            console.log(response);
+            const res = response.data.find((item) => item.name === 'imdb');
+            console.log(res);
+          }
+        });
       }
     });
-
-    /*FB.api(
-      {
-        method: 'pages.isFan',
-        page_id: '997108126967413',
-      },
-      function (response) {
-        console.log(response);
-        if (response) {
-          alert('You Likey');
-        } else {
-          alert('You not Likey :(');
-        }
-      }
-    );*/
-
-    /* make the API call */
-    FB.api('/me/likes/Meta', function (response) {
-      console.log(response);
-      if (response && !response.error) {
-        console.log(response);
-        const res = response.data.find((item) => item.name === 'Meta');
-        console.log(res);
-        /* handle the result */
-      }
-    });
-
-    //   var url = fetch('https://graph.facebook.com/oauth/access_token
-    //   ?client_id=339596424708309
-    //   &client_secret={your-app-secret}
-    //   &grant_type=client_credentials');
-    //   fetch(url)
-    // .then(function() {
-    //   // handle the response
-    // })
-    // .catch(function() {
-    //   // handle the error
-    // });
-
-    // console.log('starting');
-    // window.FB.api(
-    //   '/10159278298934071/likes/1499806100319055',
-    //   function (response) {
-    //     if (response && !response.error) {
-    //       console.log(JSON.stringify(response));
-    //     } else console.log(JSON.stringify(response));
-    //   }
-    // );
   };
 
   return (
@@ -135,7 +94,7 @@ const LikeAFacebookContentComponent = ({ rewardData }) => {
         ) : (
           <div
             className="fb-page"
-            data-href="https://www.facebook.com/facebook"
+            data-href="https://www.facebook.com/imdb"
             data-hide-cover="false"
             data-show-facepile="false"
             data-width="500"
